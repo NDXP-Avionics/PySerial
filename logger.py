@@ -5,7 +5,7 @@ from websockets.sync.client import connect
 
 def log_data():
     print("Connecting to stream... waiting for active state to begin logging")
-    
+
     csv_file = None
     writer = None
     filename = None
@@ -18,17 +18,17 @@ def log_data():
                 try:
                     data = json.loads(message)
                     current_state = data.get('state')
-                  
+
                     # Check if we should start logging (leaving standby state)
                     if not is_logging and current_state != 0:
                         # Create new file with timestamp
-                        filenhow wame = f"telemetry_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+                        filename = f"logs/telemetry_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
                         csv_file = open(filename, mode='w', newline='')
                         writer = None
                         message_count = 0
                         is_logging = True
                         print(f"Active state detected. Started logging to {filename}")
-                    
+
                     # Check if we should stop logging (returning to standby state)
                     elif is_logging and current_state == 0:
                         if csv_file:
@@ -38,7 +38,7 @@ def log_data():
                         writer = None
                         is_logging = False
                         continue
-                    
+
                     # Log data if we're in active logging mode
                     if is_logging:
                         # Flatten the data structure
@@ -49,30 +49,30 @@ def log_data():
                                     row[f"{key}_{i}"] = val
                             else:
                                 row[key] = value
-                        
+
                         # Initialize headers on first message of this logging session
                         if writer is None:
                             writer = csv.DictWriter(csv_file, fieldnames=row.keys())
                             writer.writeheader()
-                        
+
                         # Write data
                         writer.writerow(row)
                         message_count += 1
-                        
+
                         # Flush every 10 entries
                         if message_count % 10 == 0:
                             csv_file.flush()
-                        
+
                         # Optional: print status every 100 entries
                         if message_count % 100 == 0:
                             print(f"Logged {message_count} rows...")
-                
+
                 except json.JSONDecodeError:
                     continue
                 except Exception as e:
                     print(f"Error processing message: {e}")
                     continue
-    
+
     except Exception as e:
         print(f"Connection error: {e}")
     finally:
