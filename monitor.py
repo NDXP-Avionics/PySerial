@@ -70,102 +70,102 @@ def recieve():
                     alphadata["acc"][2] = pitch
 
                 case "TEMP1":
-                    celcius = packet.data[3] << 24 | packet.data[2] << 16 | packet.data[1] << 8 | packet.data[0]
-                    #print("TEMP1: ", celcius*1e-4*(9/5)+32)
-                    alphadata["temps"][0] = celcius * 1e-4 * (9/5) + 32
+                    raw = packet.data[3] << 24 | packet.data[2] << 16 | packet.data[1] << 8 | packet.data[0]
+                    #print("TEMP1: ", raw*1e-4*(9/5)+32)
+                    alphadata["temps"][0] = raw * 1e-5
 
                 case "TEMP2":
-                    celcius = packet.data[3] << 24 | packet.data[2] << 16 | packet.data[1] << 8 | packet.data[0]
-                    #print("TEMP2: ", celcius*1e-4*(9/5)+32)
-                    alphadata["temps"][1] = celcius * 1e-4 * (9/5) + 32
+                    raw = packet.data[3] << 24 | packet.data[2] << 16 | packet.data[1] << 8 | packet.data[0]
+                    #print("TEMP2: ", raw*1e-4*(9/5)+32)
+                    alphadata["temps"][1] = raw * 1e-5
 
                 case "TEMP3":
-                    celcius = packet.data[3] << 24 | packet.data[2] << 16 | packet.data[1] << 8 | packet.data[0]
-                    #print("TEMP3: ", celcius*1e-4*(9/5)+32)
-                    alphadata["temps"][2] = celcius * 1e-4 * (9/5) + 32
+                    raw = packet.data[3] << 24 | packet.data[2] << 16 | packet.data[1] << 8 | packet.data[0]
+                    #print("TEMP3: ", raw*1e-4*(9/5)+32)
+                    alphadata["temps"][2] = raw * 1e-5
 
                 case "TEMP4":
-                    celcius = packet.data[3] << 24 | packet.data[2] << 16 | packet.data[1] << 8 | packet.data[0]
-                    #print("TEMP4: ", celcius*1e-4*(9/5)+32)
-                    alphadata["temps"][3] = celcius * 1e-4 * (9/5) + 32
+                    raw = packet.data[3] << 24 | packet.data[2] << 16 | packet.data[1] << 8 | packet.data[0]
+                    #print("TEMP4: ", raw*1e-4*(9/5)+32)
+                    alphadata["temps"][3] = raw * 1e-5
 
                 case "PRESSURE1":
                     #print([hex(pac) for pac in packet.data])
-                    data = packet.data[1] << 8 | packet.data[0]
+                    data = packet.data[3] << 24 | packet.data[2] << 16 | packet.data[1] << 8 | packet.data[0]
                     #print("Pressure1: ", data, end='')
-                    alphadata["pressures"][0] = data
+                    alphadata["pressures"][0] = data * 1e-5
 
                 case "PRESSURE2":
                     #print([hex(pac) for pac in packet.data])
-                    data = packet.data[1] << 8 | packet.data[0]
+                    data = packet.data[3] << 24 | packet.data[2] << 16 | packet.data[1] << 8 | packet.data[0]
                     #print("Pressure2: ", data, end='')
-                    alphadata["pressures"][1] = data
+                    alphadata["pressures"][1] = data * 1e-5
 
                 case "PRESSURE3":
                     #print([hex(pac) for pac in packet.data])
-                    data = packet.data[1] << 8 | packet.data[0]
+                    data = packet.data[3] << 24 | packet.data[2] << 16 | packet.data[1] << 8 | packet.data[0]
                     #print("Pressure3: ", data, end='')
-                    alphadata["pressures"][2] = data
+                    alphadata["pressures"][2] = data * 1e-5
 
                 case "PRESSURE4":
                     #print([hex(pac) for pac in packet.data])
-                    data = packet.data[1] << 8 | packet.data[0]
+                    data = packet.data[3] << 24 | packet.data[2] << 16 | packet.data[1] << 8 | packet.data[0]
                     #print("Pressure4: ", data, end='')
-                    alphadata["pressures"][3] = data
+                    alphadata["pressures"][3] = data * 1e-5
 
                 case "PRESSURE5":
                     #print([hex(pac) for pac in packet.data])
-                    data = packet.data[1] << 8 | packet.data[0]
+                    data = packet.data[3] << 24 | packet.data[2] << 16 | packet.data[1] << 8 | packet.data[0]
                     #print("Pressure5: ", data, end='')
-                    alphadata["pressures"][4] = data
+                    alphadata["pressures"][4] = data * 1e-5
 
                 case "PRESSURE6":
                     #print([hex(pac) for pac in packet.data])
-                    data = packet.data[1] << 8 | packet.data[0]
+                    data = packet.data[3] << 24 | packet.data[2] << 16 | packet.data[1] << 8 | packet.data[0]
                     #print("Pressure6: ", data, end='')
-                    alphadata["pressures"][5] = data
+                    alphadata["pressures"][5] = data * 1e-5
 
                 case "PRESSURE7":
                     #print([hex(pac) for pac in packet.data])
-                    data = packet.data[1] << 8 | packet.data[0]
+                    data = packet.data[3] << 24 | packet.data[2] << 16 | packet.data[1] << 8 | packet.data[0]
                     #print("Pressure7: ", data, end='')
-                    alphadata["pressures"][6] = data
+                    alphadata["pressures"][6] = data * 1e-5
 
                 case "PRESSURE8":
                     #print([hex(pac) for pac in packet.data])
-                    data = packet.data[1] << 8 | packet.data[0]
+                    data = packet.data[3] << 24 | packet.data[2] << 16 | packet.data[1] << 8 | packet.data[0]
                     #print("Pressure8: ", data, end='')
-                    alphadata["pressures"][7] = data
+                    alphadata["pressures"][7] = data * 1e-5
 
                 case "PRESSURE9":
                     #print([hex(pac) for pac in packet.data])
-                    data = packet.data[1] << 8 | packet.data[0]
+                    data = packet.data[3] << 24 | packet.data[2] << 16 | packet.data[1] << 8 | packet.data[0]
                     #print("Pressure9: ", data, end='')
-                    alphadata["pressures"][8] = data
+                    alphadata["pressures"][8] = data * 1e-5
 
                 case "PRESSURE10":
                     #print([hex(pac) for pac in packet.data])
-                    data = packet.data[1] << 8 | packet.data[0]
+                    data = packet.data[3] << 24 | packet.data[2] << 16 | packet.data[1] << 8 | packet.data[0]
                     #print("Pressure10: ", data, end='')
-                    alphadata["pressures"][9] = data
+                    alphadata["pressures"][9] = data * 1e-5
 
                 case "PRESSURE11":
                     #print([hex(pac) for pac in packet.data])
-                    data = packet.data[1] << 8 | packet.data[0]
+                    data = packet.data[3] << 24 | packet.data[2] << 16 | packet.data[1] << 8 | packet.data[0]
                     #print("Pressure11: ", data, end='')
-                    alphadata["pressures"][10] = data
+                    alphadata["pressures"][10] = data * 1e-5
 
                 case "PRESSURE12":
                     #print([hex(pac) for pac in packet.data])
-                    data = packet.data[1] << 8 | packet.data[0]
+                    data = packet.data[3] << 24 | packet.data[2] << 16 | packet.data[1] << 8 | packet.data[0]
                     #print("Pressure12: ", data)
-                    alphadata["pressures"][11] = data
+                    alphadata["pressures"][11] = data * 1e-5
 
                 case "THRUST":
                     #print([hex(pac) for pac in packet.data])
                     data = packet.data[2] << 16 | packet.data[1] << 8 | packet.data[0]
                     #print("THRUST:", data)
-                    alphadata["thrusts"][0] = data
+                    alphadata["thrusts"][0] = data * 1e-5
 
                 case "SOLENOID":
                     #print([hex(pac) for pac in packet.data])
