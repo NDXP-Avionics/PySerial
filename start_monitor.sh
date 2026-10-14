@@ -1,10 +1,9 @@
 #!/bin/bash
-cd /home/ndxp/PySerial
 
 source ./bin/activate;
 
-python3 monitor.py &
+./bin/python3 monitor.py &
 
-sleep 1 && python3 logger.py &
+sleep 1 && ./bin/python3 logger.py &
 
 wait;

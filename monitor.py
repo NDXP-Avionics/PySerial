@@ -20,7 +20,16 @@ except:
     try:
         ser = serial.Serial('/dev/ttyUSB1', 460800) #try other device
     except:
-        print("Could not open serial connection!\n")
+        try:
+            ser = serial.Serial('/dev/tty.usbserial-1110', 460800) #try other device
+        except:
+            try:
+                ser = serial.Serial('/dev/tty.usbserial-10', 460800) #try other device
+            except:
+                try:
+                    ser = serial.Serial('/dev/tty.usbserial-210', 460800) #try other device
+                except:
+                    print("Could not open serial connection!\n")
 
 recievedBytes = 0
 start_time = 0
@@ -71,7 +80,7 @@ def recieve():
 
                 case "TEMP1":
                     raw = packet.data[3] << 24 | packet.data[2] << 16 | packet.data[1] << 8 | packet.data[0]
-                    #print("TEMP1: ", raw*1e-4*(9/5)+32)
+                    #print("TEMP1: ", raw*1e5)
                     alphadata["temps"][0] = raw * 1e-5
 
                 case "TEMP2":
@@ -92,7 +101,7 @@ def recieve():
                 case "PRESSURE1":
                     #print([hex(pac) for pac in packet.data])
                     data = packet.data[3] << 24 | packet.data[2] << 16 | packet.data[1] << 8 | packet.data[0]
-                    #print("Pressure1: ", data, end='')
+                    #print("Pressure1: ", data, "\n")
                     alphadata["pressures"][0] = data * 1e-5
 
                 case "PRESSURE2":
@@ -315,7 +324,7 @@ async def websocket_endpoint(websocket: WebSocket):
             while True:
                 raw_message = await websocket.receive_text()
                 data_dict = json.loads(raw_message)
-                #print(f"Received command: {data_dict['command']}")
+                print(f"Received command: {data_dict['command']}")
 
                 #send message
                 pkt = xp_packet_t()

@@ -4,3 +4,5 @@ bin
 include
 lib
 pyvenv.cfg
+logs
+start_mac.sh
